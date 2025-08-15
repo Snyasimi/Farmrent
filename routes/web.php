@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\{AuthController,HomePageController};
+use App\Http\Controllers\{AuthController,
+        IncomeController,
+        HomePageController,RentalController,
+        EquipmentController};
 
 
 /*
@@ -22,7 +25,19 @@ Route::get('/', function () {
 
 
 Route::get('/login',[AuthController::class,'login'])->name('login');
+Route::post('authenticate',[AuthController::class,'authenticate'])->name('authenticate');
+
+Route::post('logout',[AuthController::class,'logout'])->name('logout');
 
 Route::get('signup',[AuthController::class,'register'])->name('signUpPage');
+Route::post('register',[AuthController::class,'signup'])->name('register');
 
-Route::get('/homepage',[HomePageController::class,'index'])->name('homepage');
+
+//Route::get('/homepage',[HomePageController::class,'index'])->name('homepage');
+
+Route::get('rentals/dashborad',[RentalController::class,'dashboard'])->name('homepage');
+
+Route::resource('rentals', RentalController::class);
+Route::resource('equipment',EquipmentController::class);
+Route::resource('incomes',IncomeController::class);
+Route::resource('equipment',EquipmentController::class);

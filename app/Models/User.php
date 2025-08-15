@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        // Add any additional fields used by your app below:
+        'phone',
+        'role', // e.g. 'farmer' or 'renter'
+        // Add more fields as required by your application
     ];
 
     /**
@@ -42,4 +47,30 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //protected $fillable = ['name','email','password','role','phone'];
+
+    // Relationships
+
+    public function equipment(): HasMany
+    {
+        return $this->hasMany(Equipment::class, 'owner_id');
+    }
+
+
+    public function rentals(): HasMany
+    {
+        // As a farmer
+        return $this->hasMany(Rental::class, 'farmer_id');
+    }
+
+    public function incomes(): HasMany
+    {
+        return $this->hasMany(Income::class, 'renter_id');
+    }
+
+    public function drivers()
+    {
+        return $this->hasOne(Driver::class,'renter_id');
+    }
 }

@@ -41,4 +41,21 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+
+    // database/factories/UserFactory.php
+
+public function renter()
+{
+    return $this->state([
+        'role' => 'renter',
+    ]);
+}
+
+public function farmer()
+{
+    return $this->state([
+        'role' => 'farmer',
+    ]);
+}
 }

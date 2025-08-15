@@ -4,7 +4,7 @@
 <div class="min-h-screen flex items-center justify-center bg-green-50">
     <div class="w-full max-w-md p-8 bg-white rounded shadow">
         <h2 class="text-2xl font-bold text-green-700 mb-6 text-center">Farmer Sign Up</h2>
-        <form method="POST" action="#" class="space-y-4">
+        <form method="POST" action="{{ route('register') }}" class="space-y-4">
             @csrf
 
             <div>
@@ -14,10 +14,36 @@
             </div>
 
             <div>
-                <label class="block text-gray-700 mb-2" for="email">Email Address</label>
+                <label class="block text-gray-700 mb-2" for="email">Email</label>
                 <input id="email" type="email" name="email" required
                     class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-600">
             </div>
+
+            <div>
+                <label class="block text-gray-700 mb-2" for="email">Phone number</label>
+                <input id="phone" type="number" name="phone" required
+                    class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-600">
+            </div>
+
+
+            <div class="mb-6">
+                <label class="block text-green-800 font-semibold mb-2" for="role">
+                    Register as a:
+                </label>
+                <div class="flex gap-6">
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="radio" name="role" value="farmer"
+                               class="form-radio text-green-700 focus:ring-green-400" checked>
+                        <span class="ml-2 text-green-900">Farmer</span>
+                    </label>
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="radio" name="role" value="renter"
+                               class="form-radio text-green-700 focus:ring-green-400">
+                        <span class="ml-2 text-green-900">Renter</span>
+                    </label>
+                </div>
+            </div>
+            
             
             <div>
                 <label class="block text-gray-700 mb-2" for="password">Password</label>

@@ -5,21 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FarmRent</title>
     <!-- Tailwind CSS CDN -->
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,600,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
 </head>
-<body class="bg-green-50 min-h-screen">
+<body class="bg-green-50 min-h-screen font-sans">
 
-    <nav class="bg-green-700 text-white px-4 py-3 flex justify-between items-center shadow">
-        <a href="{{ url('/') }}" class="font-bold text-xl">FarmRent</a>
+    <nav class="bg-white shadow px-6 py-4 flex justify-between items-center">
+        <a href="{{ url('/') }}" class="font-bold text-2xl text-green-700">FarmRent</a>
         <div>
             @guest
-                <a href="{{ route('login') }}" class="mr-4 hover:underline">Login</a>
-                <a href="{{ route('signUpPage') }}" class="hover:underline">Sign Up</a>
+                <a href="{{ route('login') }}" class="mr-4 text-green-700 font-semibold hover:underline">Login</a>
+                <a href="{{ route('signUpPage') }}" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition font-semibold">Sign Up</a>
             @else
-                <span class="mr-4">Hello, {{ Auth::user()->name }}</span>
+                <span class="mr-4 text-green-900">Hello, {{ Auth::user()->name }}</span>
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                   class="hover:underline">Logout</a>
+                   class="text-green-700 hover:underline font-semibold">Logout</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                     @csrf
                 </form>
@@ -31,7 +35,7 @@
         @yield('content')
     </main>
 
-    <footer class="bg-green-700 text-white text-center py-3 mt-8">
+    <footer class="bg-white text-green-900 text-center py-6 shadow-inner mt-16">
         &copy; {{ date('Y') }} FarmRent. All rights reserved.
     </footer>
 
