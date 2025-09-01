@@ -26,7 +26,7 @@ class EquipmentController extends Controller
             $user = Auth::user();
         }
 
-        $user = User::find(25);
+       // $user = User::find(25);
 
         $equipment = $this->equipmentservice->getOwnedEquipment($user);
         return view('equipment.index', compact('equipment'));
@@ -74,6 +74,17 @@ class EquipmentController extends Controller
         $this->equipmentservice->createEquipment($validated, $user);
 
         return back()->with('success', 'Equipment added successfully!');
+    }
+
+    public function queryEquipment(Request $request)
+    {
+
+        $equipmentName = $request->query('equipmentName');
+
+        $equipment = $this->equipmentservice->queryEquipment($equipmentName);
+
+        return view('equipment.searchResults',compact('equipment'));
+        
     }
 
 }

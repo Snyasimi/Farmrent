@@ -10,23 +10,40 @@ use Illuminate\Validation\ValidationException;
 class EquipmentService
 {
 
+
+    public function queryEquipment($equipmentName)
+    {
+        //maybe clean using regex
+        //$equipmentName = 
+
+        $result =  Equipment::with('owner')->where('name','like',"%{$equipmentName}%")->paginate(10);
+
+        return $result;
+
+    }
+
+
+
     public function getOwnedEquipment($user)
     {
-        $renter_id = $user->id;
+        $owner_id = $user->id;
         
         return Equipment::with('category')
-            ->where('owner_id', $renter_id)
+            ->where('owner_id', $owner_id)
             ->orderByDesc('created_at')
             ->get();
     }
 
     public function createEquipment(array $data, $user)
-{
+    {
     // Store image and prepare image paths array
+
     $imagePath = $data['image']->store('equipment_images', 'public');
+
     $images = $imagePath;
 
     // Prepare data for DB
+
     $equipmentData = [
         'name'                  => $data['name'],
         'description'           => $data['description'] ?? null,
@@ -43,5 +60,14 @@ class EquipmentService
 
     // Create equipment for the given user (assuming rentals() is the equipment relation)
     return $user->equipment()->create($equipmentData);
-}
+
+    }
+
+    public function getListedEquipment()
+    {
+        $equipment = Equipment::with('owner')->paginate(10);
+        
+        return $equipment; 
+
+    }
 }

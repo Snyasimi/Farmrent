@@ -32,7 +32,14 @@ class EquipmentFactory extends Factory
             'driver_additional_cost' => $this->faker->randomFloat(2, 2000, 8000),
             'availability_status' => $this->faker->randomElement(['available', 'rented', 'maintenance']),
             'location' => $this->faker->city(),
-            'image' => $this->faker->imageUrl(),
+            'image' => $this->faker->randomElement([
+                'equipment_images/tractor1.jpg',
+                'equipment_images/tractor2.jpg',
+                'equipment_images/tractor3.jpg',
+                'equipment_images/tractor4.jpg',
+                'equipment_images/tractor5.jpg'
+                                                
+                ])
         ];
     }
     

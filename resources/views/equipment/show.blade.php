@@ -7,6 +7,15 @@
         <a href="{{ route('equipment.index') }}" class="text-green-700 hover:underline">&larr; Back to My Equipment</a>
     </div>
 
+    {{-- Display success or error message --}}
+    @if(session('message'))
+        <div class="mb-6">
+            <div class="bg-green-50 border border-green-200 text-green-800 p-3 rounded">
+                {{ session('message') }}
+            </div>
+        </div>
+    @endif
+
     <div class="bg-white rounded-lg shadow p-6 mb-8">
         <div class="flex gap-6 items-start">
             @php
@@ -49,6 +58,48 @@
                     </div>
                 @endif
                 <div class="mb-2"><span class="font-semibold">Description:</span> {{ $equipment->description ?? '-' }}</div>
+                
+                {{-- Booking Request Form/Button --}}
+                <div class="mt-4">
+                    @if($equipment->availability_status === 'available')
+                    <form action="{{ route('rentals.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="equipment_id" value="{{ $equipment->id }}">
+                        <div class="mb-4">
+                            <label for="rental_type" class="block text-gray-700 font-semibold mb-1">Renting Style</label>
+                            <select name="rental_type" id="rental_type" required class="border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-600">
+                                <option value="" disabled selected>Select rental style</option>
+                                <option value="hourly">Hourly</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="duration" class="block text-gray-700 font-semibold mb-1">Duration</label>
+                            <input
+                                type="number"
+                                min="1"
+                                name="duration"
+                                id="duration"
+                                required
+                                class="border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-600"
+                                placeholder="Enter duration (number of hours/days/weeks)"
+                            >
+                            <small class="text-gray-500">Enter the number of units based on the selected renting style.</small>
+                        </div>
+                        <button type="submit"
+                            class="bg-green-700 text-white px-6 py-2 rounded font-semibold hover:bg-green-800 transition">
+                            Request to Book
+                        </button>
+                    </form>
+                    @else
+                        <button type="button"
+                            class="bg-gray-300 text-gray-700 px-6 py-2 rounded font-semibold cursor-not-allowed"
+                            disabled>
+                            {{ ucfirst($equipment->availability_status) }}
+                        </button>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

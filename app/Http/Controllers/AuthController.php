@@ -73,4 +73,16 @@ class AuthController extends Controller
         return redirect()->back()->withErrors($validator)->withInput();
 
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+
+    }
 }

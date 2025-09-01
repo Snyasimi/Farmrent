@@ -6,7 +6,7 @@
         <h2 class="text-3xl font-bold text-green-700">Renter Dashboard</h2>
         <div class="flex gap-3">
             <a href="{{ route('equipment.create') }}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">Add Equipment</a>
-            <a href="{{ route('equipment.index') }}" class="bg-green-700 text-white px-4 py-2 rounded font-semibold hover:bg-green-800 transition">Rent New Equipment</a>
+            <a href="{{ route('rentEquipment')}}" class="bg-green-700 text-white px-4 py-2 rounded font-semibold hover:bg-green-800 transition">Rent New Equipment</a>
         </div>
     </div>
 

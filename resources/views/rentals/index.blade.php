@@ -4,10 +4,16 @@
 <div class="max-w-6xl mx-auto">
     <div class="flex items-center justify-between mb-8">
         <h2 class="text-3xl font-bold text-green-700">My Active Rentals</h2>
-        <a href="{{ route('equipment.index') }}"
-            class="inline-block bg-green-700 text-white px-4 py-2 rounded font-semibold hover:bg-green-800 transition">
-            Rent New Equipment
-        </a>
+        <div class="flex gap-3">
+            <a href="{{ route('rentEquipment') }}"
+                class="inline-block bg-green-700 text-white px-4 py-2 rounded font-semibold hover:bg-green-800 transition">
+                Rent New Equipment
+            </a>
+            <a href="{{ route('leasedEquipment') }}"
+                class="inline-block bg-green-100 text-green-800 px-4 py-2 rounded font-semibold border border-green-400 hover:bg-green-200 transition">
+                Leased Equipment
+            </a>
+        </div>
     </div>
 
     @if($myRentals->count())
@@ -17,7 +23,7 @@
                     <tr>
                         <th class="py-2 px-3 text-left">Equipment</th>
                         <th class="py-2 px-3 text-left">Rental Period</th>
-                        <th class="py-2 px-3 text-left">Duration (hrs)</th>
+                        <th class="py-2 px-3 text-left">Duration</th>
                         <th class="py-2 px-3 text-left">Driver</th>
                         <th class="py-2 px-3 text-left">Total Cost</th>
                         <th class="py-2 px-3 text-left">Payment</th>
@@ -26,13 +32,10 @@
                 </thead>
                 <tbody>
                     @foreach($myRentals as $rental)
-                        @php
-                            $defaultImage = "https://pxhere.com/en/photo/179861";
-                            $firstImage = $rental->equipment->images[0] ?? null;
-                        @endphp
+                     
                         <tr class="border-t border-green-100">
                             <td class="py-2 px-3 flex items-center gap-2">
-                                <img src="{{ $firstImage ? asset('storage/' . $firstImage) : $defaultImage }}" alt="" class="w-10 h-10 object-cover rounded mr-2">
+                                <img src="{{ asset('storage/' . $rental->equipment->image)  }}" alt="" class="w-16 h-16 object-cover rounded mr-2">
                                 <span>{{ $rental->equipment->name }}</span>
                             </td>
                             <td class="py-2 px-3">

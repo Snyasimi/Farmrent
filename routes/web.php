@@ -36,6 +36,12 @@ Route::post('register',[AuthController::class,'signup'])->name('register');
 //Route::get('/homepage',[HomePageController::class,'index'])->name('homepage');
 
 Route::get('rentals/dashborad',[RentalController::class,'dashboard'])->name('homepage');
+Route::get('equipment/available-equipment',[HomePageController::class,'listEquipment'])->name('rentEquipment');
+Route::get('eqipment/search/',[EquipmentController::class,'queryEquipment'])->name('searchEquipment');
+
+Route::get('rentals/requests',[RentalController::class,'rentalRequests'])->name('rentalRequests');
+Route::get('rentals/leased',[RentalController::class,'leasedEquipment'])->name('leasedEquipment');
+Route::patch('rentals/{rental}/update-status', [RentalController::class, 'updateStatus'])->name('rentals.updateStatus');
 
 Route::resource('rentals', RentalController::class);
 Route::resource('equipment',EquipmentController::class);

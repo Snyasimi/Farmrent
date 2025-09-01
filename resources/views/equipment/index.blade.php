@@ -4,9 +4,14 @@
 <div class="max-w-6xl mx-auto">
     <div class="flex justify-between items-center mb-8">
         <h2 class="text-3xl font-bold text-green-700">My Equipment</h2>
-        <a href="{{ route('equipment.create') }}" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-600">
-            + Add Equipment
-        </a>
+        <div class="flex gap-3">
+            <a href="{{ route('equipment.create') }}" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-600">
+                + Add Equipment
+            </a>
+            <a href="{{ route('rentalRequests') }}" class="bg-green-100 text-green-800 px-4 py-2 rounded border border-green-400 hover:bg-green-200">
+                View Rent Requests
+            </a>
+        </div>
     </div>
 
     @if(session('success'))
